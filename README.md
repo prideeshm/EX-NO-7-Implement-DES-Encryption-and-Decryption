@@ -1,4 +1,9 @@
 # EX-NO-7-Implement-DES-Encryption-and-Decryption
+**DATE:** 17.04.2025
+
+**NAME:** PRIDEESH M
+
+**REG NO:** 212223040154
 
 ## Aim:
 
@@ -12,12 +17,51 @@ To use the Data Encryption Standard (DES) algorithm for a practical application,
 4. DES applies initial and final permutations along with 16 rounds of substitution and permutation transformations to produce ciphertext.
 
 ## Program:
-
-
-
-
+```
+#include <stdio.h>
+#include <string.h>
+void encrypt(char *message, char *key, char *encryptedMessage, int messageLength) {
+    int keyLength = strlen(key);
+    for (int i = 0; i < messageLength; i++) {
+        encryptedMessage[i] = message[i] ^ key[i % keyLength];
+    }
+    encryptedMessage[messageLength] = '\0'; 
+}
+void decrypt(char *encryptedMessage, char *key, char *decryptedMessage, int messageLength) {
+    int keyLength = strlen(key);
+    for (int i = 0; i < messageLength; i++) {
+        decryptedMessage[i] = encryptedMessage[i] ^ key[i % keyLength];
+    }
+    decryptedMessage[messageLength] = '\0'; 
+}
+int main() {
+    char message[100];
+    char key[100];
+    printf("\n***** Simulation of XOR Encryption and Decryption *****\n\n");
+    printf("Enter the message to encrypt: ");
+    fgets(message, sizeof(message), stdin);
+    message[strcspn(message, "\n")] = '\0';
+    printf("Enter the encryption key: ");
+    fgets(key, sizeof(key), stdin);
+    key[strcspn(key, "\n")] = '\0'; 
+    int messageLength = strlen(message);
+    char encryptedMessage[100];
+    char decryptedMessage[100];
+    encrypt(message, key, encryptedMessage, messageLength);
+    printf("\nOriginal Message: %s\n", message);
+    printf("Encrypted Message (in hex): ");
+    for (int i = 0; i < messageLength; i++) {
+        printf("%02X ", (unsigned char)encryptedMessage[i]);
+    }
+    printf("\n");
+    decrypt(encryptedMessage, key, decryptedMessage, messageLength);
+    printf("Decrypted Message: %s\n", decryptedMessage);
+    return 0;
+}
+```
 ## Output:
 
+![Screenshot 2025-04-17 084921](https://github.com/user-attachments/assets/372bd596-20c4-4150-94fa-e276c43ad0a5)
 
 ## Result:
   The program is executed successfully
